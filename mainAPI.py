@@ -2,9 +2,10 @@ from fastapi import FastAPI, Request, Depends, HTTPException, status
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordBearer
+from typing import List, Optional
 
 from user import refresh
-from Get_Inventory_Item import retrieve_all_data,retrieve_dict_data
+from Get_Inventory_Item import retrieve_all_data,retrieve_dict_data,filter
 
 # Create an instance of FastAPI
 app = FastAPI()
@@ -38,3 +39,16 @@ def All_Data():
 @app.get("/Dict_Data")
 def Dict_Data():
     return retrieve_dict_data()
+
+class filterClass(BaseModel):
+    category: Optional[List[str]] = []
+    subcategory: Optional[List[str]] = []
+    price: Optional[List[float]] = []
+    size: Optional[List[str]] = []
+    color: Optional[List[str]] = []
+
+@app.post("/filterAPI")
+def filterFunction(filterClass: filterClass, request: Request):
+    
+    print(filterClass.category,filterClass.subcategory,filterClass.price,filterClass.size,filterClass.color)
+    return filter(filterClass.category,filterClass.subcategory,filterClass.price,filterClass.size,filterClass.color)

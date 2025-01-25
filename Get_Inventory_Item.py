@@ -77,6 +77,7 @@ def retrieve_dict_data():
     return dict_prod
 
 def filter(category=list, subcategory=list, price=int, size=list, color=list):
+    refresh()
     return_List = []
     working_list = []
 
