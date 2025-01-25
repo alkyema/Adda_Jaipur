@@ -1,6 +1,6 @@
 from collections import OrderedDict
 from firebase_admin import db
-import Connect_Firebase
+# import Connect_Firebase
 import datetime
 import re
 
