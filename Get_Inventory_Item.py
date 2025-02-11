@@ -4,7 +4,6 @@ from firebase_admin import db
 import datetime
 import re
 
-# Reference to your Firebase Realtime Database
 data = {}
 collection = {}
 product = []
@@ -24,13 +23,11 @@ def refresh():
     for category in collection:
         for subcategory in collection[category]:
             try:
-                # Single product case
                 if (data[category][subcategory]['ProductID']):
                     data[category][subcategory]['Category'] = category
                     data[category][subcategory]['Name'] = subcategory
                     product.append(data[category][subcategory])
             except:
-                # Multiple products case
                 for k in data[category][subcategory]:
                     data[category][subcategory][k]['Category'] = category
                     data[category][subcategory][k]['Sub_Category'] = subcategory
@@ -46,15 +43,13 @@ def dict_refresh():
     for category in collection:
         for subcategory in collection[category]:
             try:
-                # Single product case
                 if (data[category][subcategory]['ProductID']):
                     data[category][subcategory]['Category'] = category
                     data[category][subcategory]['Name'] = subcategory
                     dict_prod[f"ProductID{data[category][subcategory]['ProductID']}"] = data[category][subcategory]
             except:
-                # Multiple products case
                 for k in data[category][subcategory]:
-                    data[category][subcategory][k]['Category'] = category
+                    data    [category][subcategory][k]['Category'] = category
                     data[category][subcategory][k]['Sub_Category'] = subcategory
                     data[category][subcategory][k]['Name'] = k
                     dict_prod[f"ProductID{data[category][subcategory][k]['ProductID']}"] = data[category][subcategory][k]
@@ -197,4 +192,5 @@ def filter(category=list, subcategory=list, price=int, size=list, color=list):
 
 if __name__ == "__main__":
     refresh()
-    print(filter(category=[], subcategory=[], price=[3000,4000], size=[], color=[]))
+    print(len(product))
+    (filter(category=[], subcategory=[], price=[3000,4000], size=[], color=[]))

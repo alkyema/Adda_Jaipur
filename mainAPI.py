@@ -7,7 +7,6 @@ from typing import List, Optional
 from user import refresh
 from Get_Inventory_Item import retrieve_all_data,retrieve_dict_data,filter
 
-# Create an instance of FastAPI
 app = FastAPI()
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
